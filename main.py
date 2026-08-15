@@ -9,3 +9,4 @@ if __name__ == '__main__':
     print(anton)
     print(len(anton))
     project.show_info()
+    print(anton.get_project_count)

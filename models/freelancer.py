@@ -69,6 +69,9 @@ class Freelancer:
     def complete_orders(self, count):
         self.completed_orders += count
 
+    def get_project_count(self):
+         return len(self.projects)
+
     def increase_rate(self, amount):
         if amount<0:
              raise InvalidIncreaseError('Размер увеличения не может быть отрицательным')
