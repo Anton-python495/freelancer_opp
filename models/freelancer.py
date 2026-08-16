@@ -17,7 +17,7 @@ class Freelancer:
          return (
               f'Freelancer('
               f'name = "{self.name}", '
-              f'speciliazation = "{self.specialization}", '
+              f'specialization = "{self.specialization}", '
               f'hourly_rate = {self.hourly_rate}, '
               f'completed_orders = {self.completed_orders})'
               )
@@ -29,6 +29,15 @@ class Freelancer:
          if not isinstance(other, Freelancer):
               return NotImplemented
          return (self.name == other.name and self.specialization == other.specialization)
+
+    @classmethod
+    def from_dict(cls, data):
+         return cls(
+              data['name'],
+              data['specialization'],
+              data['hourly_rate'],
+              data['completed_orders']
+         )
     
     @property
     def hourly_rate(self):
@@ -90,6 +99,14 @@ class Freelancer:
          print(f'Проекты {self.name}:')
          for i, project in enumerate(self.projects, start=1):
               print(f'{i}. {project.name}')
+
+    def to_dict(self):
+         return {'name': f"{self.name}", 
+                 'specialization': f'{self.specialization}',
+                 'hourly_rate': self.hourly_rate,
+                 'completed_orders': self.completed_orders
+                 }
+    
 
     def info(self):
             return f"""

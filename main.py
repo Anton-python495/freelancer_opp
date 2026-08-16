@@ -1,12 +1,16 @@
 from models import Freelancer, Client, Project
+import json
 
 
 if __name__ == '__main__':
     anton = Freelancer('Anton', 'Python Developer', 5, 5)
-    client = Client('Microsoft', 'client@gmail.com')
-    project = Project('Telegram bot', client, 1500, anton)
-    anton.add_project(project)
-    print(anton)
-    print(len(anton))
-    project.show_info()
-    print(anton.get_project_count)
+    maria = Freelancer('Maria', 'Designer', 10, 10)
+    alex = Freelancer('Alex', 'Python Developer', 15, 20)
+    freelancers = [anton, maria, alex]
+    data = anton.to_dict()
+    with open("freelancer.json", 'w', encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+    with open("freelancer.json", 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    anton_loaded = Freelancer.from_dict(data)
+    print(anton_loaded)
