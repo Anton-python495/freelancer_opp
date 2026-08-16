@@ -22,5 +22,5 @@ if __name__ == '__main__':
 
     with open("freelancers.json", 'r', encoding='utf-8') as file:
         data = json.load(file)
-    freelancers = [Freelancer.from_dict(item) for item in data]
-    print(*freelancers, sep='\n')
+    loaded_freelancers = [Freelancer.from_dict(item) for item in data]
+    print(*loaded_freelancers, sep='\n')
