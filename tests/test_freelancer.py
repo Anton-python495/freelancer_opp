@@ -1,4 +1,6 @@
 from models.freelancer import Freelancer
+from models.client import Client
+from models.project import Project
 from exceptions.errors import (InvalidRateError, InvalidOrderError, InvalidIncreaseError)
 import pytest
 
@@ -50,3 +52,37 @@ def test_rate_increase():
     freelancer.increase_rate(10)
 
     assert freelancer.hourly_rate == 15
+
+def test_complete_orders():
+    freelancer  = Freelancer('Anton', 'Python Developer', 5, 5)
+
+    freelancer.complete_orders(3)
+
+    assert freelancer.completed_orders == 8
+
+def test_calculate_income():
+    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
+
+    hour = 5
+
+    assert freelancer.hourly_rate * hour == 25
+
+def test_add_project():
+    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
+    client = Client('Microsoft', 'client@gmal.com')
+    project = Project('Telegram bot', client, 1500, freelancer)
+
+    freelancer.add_project(Project)
+
+    assert freelancer.projects == [Project]
+
+def test_get_project_count():
+    freelancer = Freelancer('Антон', 'Python Developer', 5, 5)
+    client = Client('Microsoft', 'client@gmail.com')
+    project = Project('Telegram bot', client, 1500, freelancer)
+
+    assert freelancer.get_project_count() == 0
+
+    freelancer.add_project(project)
+
+    assert freelancer.get_project_count() == 1 
