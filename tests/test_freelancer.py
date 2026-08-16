@@ -1,7 +1,5 @@
-from models.freelancer import Freelancer
-from models.client import Client
-from models.project import Project
-from exceptions.errors import (InvalidRateError, InvalidOrderError, InvalidIncreaseError)
+from models import Freelancer, Client, Project
+from exceptions import InvalidRateError, InvalidOrderError, InvalidIncreaseError
 import pytest
 
 @pytest.fixture
@@ -13,7 +11,7 @@ def client():
     return Client('Microsoft', 'client@gmail.com')
 
 @pytest.fixture
-def project():
+def project(client, freelancer):
     return Project('Telegram bot', client, 1500, freelancer)
 
 def test_freelancer_creation(freelancer):
@@ -69,12 +67,12 @@ def test_calculate_income(freelancer):
 
     assert freelancer.calculate_income(hours) == 25
 
-def test_add_project(freelancer, client, project):
+def test_add_project(freelancer, project):
     freelancer.add_project(project)
 
     assert freelancer.projects == [project]
 
-def test_get_project_count(freelancer, client, project):
+def test_get_project_count(freelancer, project):
     assert freelancer.get_project_count() == 0
 
     freelancer.add_project(project)
