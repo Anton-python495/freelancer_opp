@@ -14,6 +14,21 @@ def client():
 def project(client, freelancer):
     return Project('Telegram bot', client, 1500, freelancer)
 
+@pytest.mark.parametrize(
+        "rate",
+        [
+            5,
+            10,
+            50,
+            100
+        ]
+)
+
+def test_valid_rate(rate):
+    freelancer = Freelancer('Anton', 'Python Developer', rate, 5)
+
+    assert freelancer.hourly_rate == rate
+
 def test_freelancer_creation(freelancer):
     assert freelancer.name == 'Anton'
     assert freelancer.specialization == 'Python Developer'
