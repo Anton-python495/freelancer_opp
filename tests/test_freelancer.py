@@ -63,18 +63,18 @@ def test_complete_orders():
 def test_calculate_income():
     freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
 
-    hour = 5
+    hours = 5
 
-    assert freelancer.hourly_rate * hour == 25
+    assert freelancer.calculate_income(hours) == 25
 
 def test_add_project():
     freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
     client = Client('Microsoft', 'client@gmal.com')
     project = Project('Telegram bot', client, 1500, freelancer)
 
-    freelancer.add_project(Project)
+    freelancer.add_project(project)
 
-    assert freelancer.projects == [Project]
+    assert freelancer.projects == [project]
 
 def test_get_project_count():
     freelancer = Freelancer('Антон', 'Python Developer', 5, 5)
