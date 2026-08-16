@@ -101,8 +101,8 @@ class Freelancer:
               print(f'{i}. {project.name}')
 
     def to_dict(self):
-         return {'name': f"{self.name}", 
-                 'specialization': f'{self.specialization}',
+         return {'name': self.name, 
+                 'specialization': self.specialization,
                  'hourly_rate': self.hourly_rate,
                  'completed_orders': self.completed_orders
                  }

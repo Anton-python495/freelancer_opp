@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Anton",
+        "specialization": "Python Developer",
+        "hourly_rate": 5,
+        "completed_orders": 5
+    },
+    {
+        "name": "Maria",
+        "specialization": "Designer",
+        "hourly_rate": 10,
+        "completed_orders": 10
+    },
+    {
+        "name": "Alex",
+        "specialization": "Python Developer",
+        "hourly_rate": 15,
+        "completed_orders": 20
+    }
+]
