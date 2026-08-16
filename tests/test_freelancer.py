@@ -4,17 +4,25 @@ from models.project import Project
 from exceptions.errors import (InvalidRateError, InvalidOrderError, InvalidIncreaseError)
 import pytest
 
-def test_freelancer_creation():
-    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
+@pytest.fixture
+def freelancer():
+    return Freelancer('Anton', 'Python Developer', 5, 5)
 
+@pytest.fixture
+def client():
+    return Client('Microsoft', 'client@gmail.com')
+
+@pytest.fixture
+def project():
+    return Project('Telegram bot', client, 1500, freelancer)
+
+def test_freelancer_creation(freelancer):
     assert freelancer.name == 'Anton'
     assert freelancer.specialization == 'Python Developer'
     assert freelancer.hourly_rate == 5
     assert freelancer.completed_orders == 5
 
-def test_freelancer_to_dict():
-    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
-
+def test_freelancer_to_dict(freelancer):
     data = freelancer.to_dict()
 
     assert data['name'] == 'Anton'
@@ -46,41 +54,27 @@ def test_invalid_increase():
     with pytest.raises(InvalidIncreaseError):
         freelancer.increase_rate(-10)
 
-def test_rate_increase():
-    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
-
+def test_rate_increase(freelancer):
     freelancer.increase_rate(10)
 
     assert freelancer.hourly_rate == 15
 
-def test_complete_orders():
-    freelancer  = Freelancer('Anton', 'Python Developer', 5, 5)
-
+def test_complete_orders(freelancer):
     freelancer.complete_orders(3)
 
     assert freelancer.completed_orders == 8
 
-def test_calculate_income():
-    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
-
+def test_calculate_income(freelancer):
     hours = 5
 
     assert freelancer.calculate_income(hours) == 25
 
-def test_add_project():
-    freelancer = Freelancer('Anton', 'Python Developer', 5, 5)
-    client = Client('Microsoft', 'client@gmal.com')
-    project = Project('Telegram bot', client, 1500, freelancer)
-
+def test_add_project(freelancer, client, project):
     freelancer.add_project(project)
 
     assert freelancer.projects == [project]
 
-def test_get_project_count():
-    freelancer = Freelancer('Антон', 'Python Developer', 5, 5)
-    client = Client('Microsoft', 'client@gmail.com')
-    project = Project('Telegram bot', client, 1500, freelancer)
-
+def test_get_project_count(freelancer, client, project):
     assert freelancer.get_project_count() == 0
 
     freelancer.add_project(project)
