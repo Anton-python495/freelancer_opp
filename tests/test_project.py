@@ -9,7 +9,7 @@ def test_project_creation(project):
     assert project.budget == 1500
     assert project.freelancer.name == "Anton"
 
-def test_project_show_project(project, capsys):
+def test_project_show_info(project, capsys):
     project.show_info()
 
     captured = capsys.readouterr()
@@ -19,3 +19,17 @@ def test_project_show_project(project, capsys):
     assert "client@gmail.com" in captured.out
     assert "1500" in captured.out
     assert "Anton" in captured.out
+
+@pytest.mark.parametrize(
+    'budget',
+    [
+        100,
+        500,
+        1000,
+        5000,
+        10000
+    ]
+)
+def test_valid_project_budget(client, freelancer, budget):
+    project = Project('Telegramm bot', client, budget, freelancer)
+    assert project.budget == budget
