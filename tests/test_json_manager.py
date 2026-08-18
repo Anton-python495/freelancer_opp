@@ -1,4 +1,4 @@
-from utils.json_manager import save_json, load_json
+from utils import save_json, load_json
 
 def test_save_json(tmp_path):
     data = {'name': 'Anton', "hourly_rate": 10}

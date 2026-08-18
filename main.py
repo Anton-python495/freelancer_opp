@@ -1,18 +1,18 @@
 from models import Freelancer
-from utils.json_manager import save_json, load_json
+from utils import save_json, load_json
 
 
 
 if __name__ == '__main__':
-    data = {
-        'name': "Anton",
-        "specialization": "Python Developer",
-        "hourly_rate": 10,
-        "completed_orders": 15
-    }
-    save_json(data, 'data')
+    freelancers = [Freelancer("Anton", "Python Developer", 10, 15),
+                   Freelancer("Maria", "Designer", 15, 20),
+                   Freelancer("Alex", "Backend Developer", 25, 30)]
+    
+    data = [freelancer.to_dict() for freelancer in freelancers]
 
-    loaded_data = load_json('data')
+    save_json(data, "freelancers")
 
-    freelancer = Freelancer.from_dict(loaded_data)
-    print(freelancer.info())
+    loaded_data = load_json("freelancers")
+
+    freelancers = [Freelancer.from_dict(data) for data in loaded_data]
+    print(freelancers)
