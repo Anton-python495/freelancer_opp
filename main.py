@@ -1,5 +1,6 @@
-from models import Freelancer, Client, Project
-import json
+from models import Freelancer
+from utils.json_manager import save_json, load_json
+
 
 
 if __name__ == '__main__':
@@ -9,6 +10,9 @@ if __name__ == '__main__':
         "hourly_rate": 10,
         "completed_orders": 15
     }
-    with open('data.json', 'w', encoding = 'utf-8') as file:
-        json.dump(data, file, ensure_ascii = False, indent = 4)
-        
+    save_json(data, 'data')
+
+    loaded_data = load_json('data')
+
+    freelancer = Freelancer.from_dict(loaded_data)
+    print(freelancer.info())
