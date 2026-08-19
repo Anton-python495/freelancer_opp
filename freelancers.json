@@ -3,18 +3,12 @@
         "name": "Anton",
         "specialization": "Python Developer",
         "hourly_rate": 10,
-        "completed_orders": 15
+        "completed_orders": 5
     },
     {
         "name": "Maria",
         "specialization": "Designer",
-        "hourly_rate": 15,
-        "completed_orders": 20
-    },
-    {
-        "name": "Alex",
-        "specialization": "Backend Developer",
-        "hourly_rate": 25,
-        "completed_orders": 30
+        "hourly_rate": 10,
+        "completed_orders": 15
     }
 ]

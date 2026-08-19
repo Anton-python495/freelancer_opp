@@ -1,18 +1,25 @@
 from models import Freelancer
-from utils import save_json, load_json
+from utils import FreelancerManager
 
 
 
 if __name__ == '__main__':
-    freelancers = [Freelancer("Anton", "Python Developer", 10, 15),
-                   Freelancer("Maria", "Designer", 15, 20),
-                   Freelancer("Alex", "Backend Developer", 25, 30)]
-    
-    data = [freelancer.to_dict() for freelancer in freelancers]
+    anton = Freelancer("Anton", "Python Developer", 5, 5)
+    maria = Freelancer("Maria", 'Designer', 10, 15)
 
-    save_json(data, "freelancers")
+    manager = FreelancerManager()
 
-    loaded_data = load_json("freelancers")
+    manager.add_freelancer(anton)
+    manager.add_freelancer(maria)
 
-    freelancers = [Freelancer.from_dict(data) for data in loaded_data]
-    print(freelancers)
+    print(manager.freelancers)
+    anton = manager.get_freelancer("Anton")
+    print(anton)
+
+    anton = manager.update_freelancer("Anton", 10)
+    print(anton)
+
+    manager.save("freelancers")
+    manager.load("freelancers")
+    manager1 = manager
+    print(manager1.freelancers)
